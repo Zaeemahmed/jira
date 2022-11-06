@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcontainers=self.webpackChunkcontainers||[]).push([[784],{784:(e,n,t)=>{t.r(n);var r=t(104),l=t.n(r),c=t(871);const a=()=>l().createElement("div",null,l().createElement("h2",null,"Hi from containers App"));t.n(c)().render(l().createElement(a,null),document.getElementById("root"))}}]);

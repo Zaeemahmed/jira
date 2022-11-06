@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkui=self.webpackChunkui||[]).push([[784],{784:(e,n,t)=>{t.r(n);var l=t(104),r=t.n(l),u=t(871);const c=()=>r().createElement("div",null,r().createElement("h2",null,"Hi from UI"));t.n(u)().render(r().createElement(c,null),document.getElementById("root"))}}]);
