@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { Datepicker } from "../../components/datepicker";
 import { HookFormDatePicker } from "../../components/datepicker/hookformdatepicker";
+import { ThemeProvider } from "../../utils/ThemeProvider";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -19,9 +20,15 @@ const Template: ComponentStory<typeof Datepicker> = (args) => {
   const { control } = useForm();
 
   return (
-    <form>
-      <HookFormDatePicker control={control} name="test" />
-    </form>
+    <ThemeProvider>
+      <form>
+        <HookFormDatePicker
+          control={control}
+          name="test"
+          defaultValue={new Date()}
+        />
+      </form>
+    </ThemeProvider>
   );
 };
 
