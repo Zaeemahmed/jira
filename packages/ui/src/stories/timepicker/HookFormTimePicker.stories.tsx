@@ -1,33 +1,40 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Box } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-import { HookFormDatePicker } from "../../components/datepicker/hookformdatepicker";
+import { HookFormTimePicker } from "../../components/timepicker/hookformtimepicker";
 import { ThemeProvider } from "../../utils/ThemeProvider";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Example/HookFormDatepicker",
-  component: HookFormDatePicker,
+  title: "Example/HookFormTimepicker",
+  component: HookFormTimePicker,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof HookFormDatePicker>;
+} as ComponentMeta<typeof HookFormTimePicker>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof HookFormDatePicker> = (args) => {
-  const { control } = useForm();
+const Template: ComponentStory<typeof HookFormTimePicker> = (args) => {
+  const { control, watch } = useForm();
 
+  console.log(watch("test")); 
   return (
     <ThemeProvider>
       <form>
-        <Box sx={{ width: "500px" }}>
-          <HookFormDatePicker
-            control={control}
-            name="test"
-            defaultValue={new Date()}
-          />
-        </Box>
+        <HookFormTimePicker
+          name="test"
+          control={control}
+          timeOptions={[
+            "9:00 AM",
+            "9:30 AM",
+            "10:00 AM",
+            "10:30 AM",
+            "11:00 AM",
+            "11:30 AM",
+            "12:00 AM",
+            "12:30 AM",
+          ]}
+        />
       </form>
     </ThemeProvider>
   );

@@ -7,6 +7,8 @@ const paletteOptions: PaletteOptions = {
   core: {
     lightBlue: "#4C9AFF",
     lightText: "#6B778C",
+    white: "#FFFFFF",
+    blue: "#0052CC",
   },
 };
 

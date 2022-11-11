@@ -11,6 +11,7 @@ export const Label = ({ labelText }: LabelProps) => {
     <Typography
       fontFamily={theme.typography.fontFamily}
       color={theme.palette.core.lightText}
+      fontSize="14px"
     >
       {labelText}
     </Typography>
