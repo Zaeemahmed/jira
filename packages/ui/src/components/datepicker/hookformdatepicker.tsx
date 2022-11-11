@@ -6,9 +6,10 @@ import {
   PathValue,
   Controller,
 } from "react-hook-form";
-import { TextFieldProps, TextField } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 import { DatePickerProps, Datepicker } from "./datepicker";
 import { Label } from "../label/Lable";
+import { StyledTextField } from "./datepicker.styles";
 
 export type DatePickerElementProps<
   T extends FieldValues,
@@ -22,7 +23,6 @@ export type DatePickerElementProps<
   required?: boolean;
   isDate?: boolean;
   onChange?: (value: TDate, keyboardInputValue?: string) => void;
-  parseDate?: (value: TDate, keyboardInputValue?: string) => TDate;
   control?: Control<T>;
   helperText?: TextFieldProps["helperText"];
   defaultValue?: PathValue<T, Path<T>>;
@@ -44,7 +44,9 @@ export function HookFormDatePicker<T extends FieldValues>({
         defaultValue={defaultValue}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Datepicker
-            renderInput={(params: TextFieldProps) => <TextField {...params} />}
+            renderInput={(params: TextFieldProps) => (
+              <StyledTextField {...params} />
+            )}
             value={value || ""}
             onChange={(value, keyboardInputValue) => {
               let newValue: undefined | string = undefined;
