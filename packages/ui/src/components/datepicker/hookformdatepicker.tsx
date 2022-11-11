@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
   FieldValues,
   Path,
   Control,
   PathValue,
   Controller,
-} from "react-hook-form";
-import { TextFieldProps, TextField } from "@mui/material";
-import { DatePickerProps, Datepicker } from "./datepicker";
-import { Label } from "../label/Lable";
+} from 'react-hook-form';
+import { TextFieldProps, TextField } from '@mui/material';
+import { DatePickerProps, Datepicker } from './datepicker';
+import { Label } from '../label/Label';
 
 export type DatePickerElementProps<
   T extends FieldValues,
   TInputDate,
-  TDate = TInputDate
+  TDate = TInputDate,
 > = Omit<
   DatePickerProps<TInputDate, TDate>,
-  "value" | "onChange" | "renderInput"
+  'value' | 'onChange' | 'renderInput'
 > & {
   name: Path<T>;
   required?: boolean;
@@ -24,7 +24,7 @@ export type DatePickerElementProps<
   onChange?: (value: TDate, keyboardInputValue?: string) => void;
   parseDate?: (value: TDate, keyboardInputValue?: string) => TDate;
   control?: Control<T>;
-  helperText?: TextFieldProps["helperText"];
+  helperText?: TextFieldProps['helperText'];
   defaultValue?: PathValue<T, Path<T>>;
 };
 
@@ -37,7 +37,7 @@ export function HookFormDatePicker<T extends FieldValues>({
 }: DatePickerElementProps<T, any, any>) {
   return (
     <>
-      <Label labelText="Start date" />
+      <Label labelText='Start date' />
       <Controller
         name={name}
         control={control}
@@ -45,7 +45,7 @@ export function HookFormDatePicker<T extends FieldValues>({
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <Datepicker
             renderInput={(params: TextFieldProps) => <TextField {...params} />}
-            value={value || ""}
+            value={value || ''}
             onChange={(value, keyboardInputValue) => {
               let newValue: undefined | string = undefined;
               // if (keyboardInputValue) {
@@ -63,7 +63,7 @@ export function HookFormDatePicker<T extends FieldValues>({
               // }
               newValue = value as string;
               onChange(newValue, keyboardInputValue);
-              if (typeof rest.onChange === "function") {
+              if (typeof rest.onChange === 'function') {
                 rest.onChange(newValue, keyboardInputValue);
               }
             }}
