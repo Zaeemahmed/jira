@@ -1,3 +1,3 @@
+import { HookFormTextedField } from './HookFormTextedField';
 import { TextInputField } from './TextInputField';
-
-export { TextInputField };
+export { TextInputField, HookFormTextedField };

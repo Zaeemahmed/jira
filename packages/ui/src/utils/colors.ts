@@ -3,6 +3,9 @@ export interface CorePalette {
   lightText?: string;
   neutralN40?: string;
   neutralN900?: string;
+  neutralN100?: string;
+  white?: string;
+  blue?: string;
 }
 
 declare module '@mui/material/styles' {

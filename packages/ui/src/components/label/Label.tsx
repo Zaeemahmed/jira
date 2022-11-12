@@ -13,7 +13,7 @@ export const Label = ({ labelText, htmlFor }: LabelProps) => {
       display='block'
       component='label'
       fontFamily={theme.typography.fontFamily}
-      color={theme.palette.core?.lightText ?? '#6B778C'}
+      color={theme.palette.core?.lightText}
       fontWeight={theme.typography.fontWeightBold}
       fontSize='12px'
       lineHeight='16px'

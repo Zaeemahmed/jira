@@ -3,6 +3,7 @@ import { DatePickerProps as MuiDatePickerProps } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { SxProps } from "@mui/material/styles";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 import { StyledDatePicker } from "./datepicker.styles";
 
@@ -14,6 +15,7 @@ export interface DatePickerProps<TInput, TDate> {
   onClose?: MuiDatePickerProps<TDate, TInput>["onClose"];
   open?: MuiDatePickerProps<TDate, TInput>["open"];
   PopperProps?: MuiDatePickerProps<TDate, TInput>["PopperProps"];
+  components?: MuiDatePickerProps<TDate, TInput>["components"];
 }
 
 export function Datepicker<TInput, TDate>({
@@ -23,10 +25,11 @@ export function Datepicker<TInput, TDate>({
   onOpen,
   open,
   renderInput,
+  components,
 }: DatePickerProps<TInput, TDate>): JSX.Element {
   const sxProps: SxProps = {
     "& .MuiPaper-root": {
-      marginTop: "10px",
+      marginTop: "5px",
     },
   };
   return (
@@ -41,7 +44,10 @@ export function Datepicker<TInput, TDate>({
         PopperProps={{
           sx: sxProps,
           disablePortal: true,
-          placement: "bottom-end",
+          placement: "bottom-start",
+        }}
+        components={{
+          OpenPickerIcon: CalendarMonthIcon,
         }}
       />
     </LocalizationProvider>
