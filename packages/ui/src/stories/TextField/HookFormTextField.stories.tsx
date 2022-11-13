@@ -21,7 +21,6 @@ const Template: ComponentStory<typeof HookFormTextedField> = (args) => {
         <Box sx={{ width: '500px' }}>
           <HookFormTextedField
             {...args}
-            hasLabel
             labelText='Text'
             control={control}
             name='test'
@@ -37,4 +36,6 @@ export const HookFormTextFieldStory = Template.bind({});
 
 HookFormTextFieldStory.args = {
   hasLabel: false,
+  hasIcon: false,
+  inputIconType: 'search',
 };

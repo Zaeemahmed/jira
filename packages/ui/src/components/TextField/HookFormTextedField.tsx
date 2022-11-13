@@ -1,6 +1,12 @@
 import React from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
+import {
+  TextField,
+  TextFieldProps,
+  useTheme,
+  InputAdornment,
+} from '@mui/material';
 import { Label, LabelProps } from '../label/Label';
+import { Search, Public } from '@mui/icons-material';
 import {
   Control,
   Controller,
@@ -9,7 +15,7 @@ import {
   Path,
 } from 'react-hook-form';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { StyledTextField } from './TextInputField';
+import { StyledTextField, iconsTypes } from './TextInputField';
 
 export type HookFormTextedFieldProps<T extends FieldValues = FieldValues> =
   Omit<TextFieldProps, 'name'> &
@@ -18,7 +24,10 @@ export type HookFormTextedFieldProps<T extends FieldValues = FieldValues> =
       name: Path<T>;
       //   parseError?: (error: FieldError) => string;
       control?: Control<T>;
-      hasLabel: boolean;
+      hasLabel?: boolean;
+      hasIcon: boolean;
+      inputIconType: iconsTypes;
+      iconPosition: 'end' | 'start';
     };
 
 export function HookFormTextedField<
@@ -34,11 +43,22 @@ export function HookFormTextedField<
   hasLabel,
   fullWidth,
   disabled,
+  hasIcon,
+  inputIconType,
+  iconPosition,
   ...rest
 }: HookFormTextedFieldProps<TFieldValues>): JSX.Element {
   //   if (required && !validation.required) {
   //     validation.required = 'This field is required';
   //   }
+
+  const theme = useTheme();
+  const icon =
+    inputIconType === 'search' ? (
+      <Search htmlColor={theme.palette.core?.neutralN100} />
+    ) : (
+      <Public htmlColor={theme.palette.core?.neutralN100} />
+    );
 
   if (type === 'email' && !validation.pattern) {
     validation.pattern = {
@@ -61,6 +81,7 @@ export function HookFormTextedField<
         }) => (
           <StyledTextField
             {...rest}
+            id={name}
             fullWidth
             name={name}
             value={value ?? ''}
@@ -69,6 +90,18 @@ export function HookFormTextedField<
               if (typeof rest.onChange === 'function') {
                 rest.onChange(ev);
               }
+            }}
+            InputProps={{
+              startAdornment: iconPosition === 'start' && (
+                <InputAdornment position='start'>
+                  {hasIcon && icon}
+                </InputAdornment>
+              ),
+              endAdornment: iconPosition === 'end' && (
+                <InputAdornment position='start'>
+                  {hasIcon && icon}
+                </InputAdornment>
+              ),
             }}
             onBlur={onBlur}
             required={required}
