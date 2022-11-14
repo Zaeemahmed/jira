@@ -5,7 +5,7 @@ import { Timepicker } from "../../components/timepicker/timepicker";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Example/Timepicker",
+  title: "Example/timepicker",
   component: Timepicker,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
@@ -21,9 +21,9 @@ const Template: ComponentStory<typeof Timepicker> = (args) => {
   return <Timepicker {...args} value={value} onClick={onClick} />;
 };
 
-export const Primary = Template.bind({});
+export const TimepickerStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+TimepickerStory.args = {
   timeOptions: [
     "9:00 AM",
     "9:30 AM",
