@@ -1,14 +1,17 @@
-import { createTheme, Theme } from "@mui/material";
-import { PaletteOptions } from "@mui/material/styles";
-import { TypographyOptions } from "@mui/material/styles/createTypography";
-import { createSpacing } from "@mui/system";
+import { createTheme, Theme } from '@mui/material';
+import { PaletteOptions } from '@mui/material/styles';
+import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { createSpacing } from '@mui/system';
 
 const paletteOptions: PaletteOptions = {
   core: {
-    lightBlue: "#4C9AFF",
-    lightText: "#6B778C",
-    white: "#FFFFFF",
-    blue: "#0052CC",
+    lightBlue: '#4C9AFF',
+    lightText: '#6B778C',
+    neutralN0: '#FFFFFF',
+    neutralN30: '#EBECF0',
+    neutralN40: '#DFE1E6',
+    neutralN900: '#091E42',
+    neutralN100: '#42526E',
   },
 };
 
