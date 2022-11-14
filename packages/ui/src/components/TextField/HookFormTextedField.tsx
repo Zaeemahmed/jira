@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   TextField,
   TextFieldProps,
@@ -25,9 +25,9 @@ export type HookFormTextedFieldProps<T extends FieldValues = FieldValues> =
       //   parseError?: (error: FieldError) => string;
       control?: Control<T>;
       hasLabel?: boolean;
-      hasIcon: boolean;
-      inputIconType: iconsTypes;
-      iconPosition: 'end' | 'start';
+      hasIcon?: boolean;
+      inputIconType?: iconsTypes;
+      iconPosition?: 'end' | 'start';
     };
 
 export function HookFormTextedField<
@@ -46,6 +46,8 @@ export function HookFormTextedField<
   hasIcon,
   inputIconType,
   iconPosition,
+  multiline,
+  rows = 6,
   ...rest
 }: HookFormTextedFieldProps<TFieldValues>): JSX.Element {
   //   if (required && !validation.required) {
@@ -82,6 +84,8 @@ export function HookFormTextedField<
           <StyledTextField
             {...rest}
             id={name}
+            multiline={multiline}
+            rows={rows}
             fullWidth
             name={name}
             value={value ?? ''}

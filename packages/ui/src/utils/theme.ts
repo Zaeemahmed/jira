@@ -7,6 +7,8 @@ const paletteOptions: PaletteOptions = {
   core: {
     lightBlue: '#4C9AFF',
     lightText: '#6B778C',
+    neutralN0: '#FFFFFF',
+    neutralN30: '#EBECF0',
     neutralN40: '#DFE1E6',
     neutralN900: '#091E42',
     neutralN100: '#42526E',

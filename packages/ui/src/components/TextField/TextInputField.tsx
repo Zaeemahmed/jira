@@ -19,30 +19,40 @@ type TextInputProps = LabelProps &
     iconPosition: 'end' | 'start';
   };
 
-export const StyledTextField = styled(TextField)(({ theme }) => ({
-  '& .MuiOutlinedInput-root': {
-    fontSize: '14px',
-    fontWeight: theme.typography.fontWeightRegular,
-    color: theme.palette.core?.neutralN900,
-    paddingLeft: '8px',
-    '& input': {
-      padding: '10px 6px',
+export const StyledTextField = styled(TextField)<TextFieldProps>(
+  ({ theme, disabled, multiline }) => ({
+    '& .MuiOutlinedInput-root': {
+      fontSize: '14px',
+      fontWeight: theme.typography.fontWeightRegular,
+      color: theme.palette.core?.neutralN900,
+      paddingLeft: '8px',
+
+      background: disabled
+        ? theme.palette.core.neutralN30
+        : theme.palette.core.neutralN0,
+      '& input': {
+        padding: '10px 6px',
+      },
+      '& textarea': {
+        height: '160px !important',
+      },
+      marginTop: '4px',
+      '& fieldset': {
+        border: `2px solid ${theme.palette.core?.neutralN40}`,
+      },
+
+      '&.Mui-focused fieldset': {
+        borderColor: `${theme.palette.core?.lightBlue}`,
+      },
+      '.MuiInputAdornment-root': {
+        marginRight: '0',
+      },
+      '&.MuiInputBase-multiline': {
+        padding: '8px',
+      },
     },
-    marginTop: '4px',
-    '& fieldset': {
-      border: `2px solid ${theme.palette.core?.neutralN40}`,
-    },
-    '&:hover fieldset': {
-      borderColor: `${theme.palette.core?.neutralN40}`,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: `${theme.palette.core?.lightBlue}`,
-    },
-    '.MuiInputAdornment-root': {
-      marginRight: '0',
-    },
-  },
-}));
+  }),
+);
 
 export function TextInputField({
   labelText,
@@ -59,6 +69,8 @@ export function TextInputField({
   disabled,
   inputIconType,
   iconPosition,
+  multiline,
+  rows = 6,
   ...rest
 }: TextInputProps) {
   const theme = useTheme();
@@ -83,6 +95,8 @@ export function TextInputField({
         {...rest}
         id={name}
         fullWidth
+        multiline={multiline}
+        rows={rows}
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}

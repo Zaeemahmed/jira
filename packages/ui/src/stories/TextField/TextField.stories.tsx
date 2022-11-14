@@ -22,8 +22,9 @@ const Template: ComponentStory<typeof TextInputField> = (args) => (
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  multiline: false,
   hasIcon: false,
-  
+  disabled: false,
   inputIconType: 'search',
   placeholder: 'Text',
   hasLabel: false,

@@ -35,7 +35,12 @@ const Template: ComponentStory<typeof HookFormTextedField> = (args) => {
 export const HookFormTextFieldStory = Template.bind({});
 
 HookFormTextFieldStory.args = {
+  disabled: false,
+  multiline: false,
   hasLabel: false,
   hasIcon: false,
   inputIconType: 'search',
+  placeholder: 'Text',
+  labelText: 'Text Field',
+  name: 'Text Field',
 };

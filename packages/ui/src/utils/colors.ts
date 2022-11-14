@@ -1,7 +1,9 @@
 export interface CorePalette {
   lightBlue?: string;
   lightText?: string;
+  neutralN0: string;
   neutralN40?: string;
+  neutralN30?: string;
   neutralN900?: string;
   neutralN100?: string;
   white?: string;
