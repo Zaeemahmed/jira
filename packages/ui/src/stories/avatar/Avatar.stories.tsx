@@ -20,6 +20,7 @@ const Template: ComponentStory<typeof Avatars> = (args) => (
 export const Avatar = Template.bind({});
 
 Avatar.args = {
+  src: '../../utils/Assets/Image.png',
   size: 'normal',
   variant: 'rounded',
 };

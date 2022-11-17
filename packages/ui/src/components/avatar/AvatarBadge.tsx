@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, BadgeProps } from '@mui/material';
+import { Badge, BadgeProps, styled } from '@mui/material';
 import {
   AwayIcon,
   BusyIcon,
@@ -32,6 +32,13 @@ type BadgesProps = BadgeProps & {
   variant: 'dot' | 'standard';
 };
 
+const StyledBadge = styled(Badge)(() => ({
+  '.MuiBadge-badge': {
+    top: '2px',
+    right: '5px',
+  },
+}));
+
 export const AvatarBadge = ({
   children,
   horizontal,
@@ -45,7 +52,7 @@ export const AvatarBadge = ({
     : userPresence[presence || 'none'];
 
   return (
-    <Badge
+    <StyledBadge
       {...rest}
       variant={variant}
       badgeContent={userActivity}
@@ -55,6 +62,6 @@ export const AvatarBadge = ({
       }}
     >
       {children}
-    </Badge>
+    </StyledBadge>
   );
 };

@@ -18,7 +18,7 @@ type AvatarsProps = AvatarProps & {
 
 export const Avatars = ({ src, size, variant, ...rest }: AvatarsProps) => {
   return (
-    <AvatarBadge status='locked'>
+    <AvatarBadge status='locked' variant='standard'>
       <Avatar
         {...rest}
         src={src}
