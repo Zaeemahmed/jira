@@ -12,6 +12,8 @@ const paletteOptions: PaletteOptions = {
     neutralN40: '#DFE1E6',
     neutralN900: '#091E42',
     neutralN100: '#42526E',
+    neutralN700: '#253858',
+    yellowY300: '#FFAB00',
     BlueB500: '#0747A6',
     BlueB600: '#0052CC',
     RedR400: '#DE350B',

@@ -6,6 +6,8 @@ export interface CorePalette {
   neutralN30?: string;
   neutralN900?: string;
   neutralN100?: string;
+  neutralN700?: string;
+  yellowY300?: string;
   white?: string;
   blue?: string;
   BlueB600?: string;
