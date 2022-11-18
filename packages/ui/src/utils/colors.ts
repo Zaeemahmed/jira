@@ -6,9 +6,17 @@ export interface CorePalette {
   neutralN30?: string;
   neutralN900?: string;
   neutralN100?: string;
+  neutralN700?: string;
   yellowY300?: string;
   white?: string;
   blue?: string;
+  BlueB600?: string;
+  RedR400?: string;
+  RedR50?: string;
+  GreenG50?: string;
+  GreenG500?: string;
+  RedR500?: string;
+  BlueB500?: string;
 }
 
 declare module '@mui/material/styles' {
