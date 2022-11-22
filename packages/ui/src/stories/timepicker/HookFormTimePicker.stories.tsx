@@ -7,7 +7,7 @@ import { ThemeProvider } from "../../utils/ThemeProvider";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Example/HookFormTimepicker",
+  title: "Example/timepicker",
   component: HookFormTimePicker,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
@@ -17,7 +17,6 @@ export default {
 const Template: ComponentStory<typeof HookFormTimePicker> = (args) => {
   const { control, watch } = useForm();
 
-  console.log(watch("test")); 
   return (
     <ThemeProvider>
       <form>
@@ -40,6 +39,6 @@ const Template: ComponentStory<typeof HookFormTimePicker> = (args) => {
   );
 };
 
-export const Primary = Template.bind({});
+export const HookFormTimePickerStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {};
+HookFormTimePickerStory.args = {};
