@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, useTheme } from '@mui/material';
+import { Banner } from '../Banner';
 
 export interface LabelProps {
   labelText: string;
