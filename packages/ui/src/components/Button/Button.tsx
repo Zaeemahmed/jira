@@ -53,9 +53,9 @@ type ButtonsProps = ButtonProps & {
 };
 
 const StyledButtons = styled(Button)<ButtonsProps>(
-  ({ theme, appearance, iconBefore, disabled, href }) => ({
+  ({ theme, appearance, iconBefore, disabled, href, isLoading }) => ({
     position: 'relative',
-    pointerEvents: disabled ? 'none' : 'auto',
+    pointerEvents: disabled || isLoading   ? 'none' : 'auto',
     alignItems: 'center',
     flexDirection: iconBefore ? 'row' : 'row-reverse',
     gap: '4px',
