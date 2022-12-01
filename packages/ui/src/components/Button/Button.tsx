@@ -15,6 +15,7 @@ const ButtonAppearanceType = {
   warning: theme.palette.core.yellowY300,
   subtle: theme.palette.core.ColorTransparent,
   subtleLink: theme.palette.core.ColorTransparent,
+  none: theme.palette.core.neutralN0,
 };
 
 const ButtonHoverEffect = {
@@ -25,6 +26,7 @@ const ButtonHoverEffect = {
   danger: theme.palette.core.RedR300,
   subtleLink: theme.palette.core.ColorTransparent,
   subtle: theme.palette.core.neutralN20A,
+  none: theme.palette.core.neutralN0,
 };
 
 const ButtonActiveEffect = {
@@ -35,6 +37,7 @@ const ButtonActiveEffect = {
   link: theme.palette.core.BlueB500,
   subtleLink: theme.palette.core.ColorTransparent,
   subtle: theme.palette.core.neutralN400,
+  none: theme.palette.core.neutralN0,
 };
 
 type ButtonsProps = ButtonProps & {
@@ -45,7 +48,8 @@ type ButtonsProps = ButtonProps & {
     | 'primary'
     | 'warning'
     | 'subtle'
-    | 'subtleLink';
+    | 'subtleLink'
+    | 'none';
   Icon?: ReactElement;
   iconbefore?: boolean;
   href?: string;

@@ -16,6 +16,7 @@ export interface CorePalette {
   RedR400: string;
   RedR50: string;
   GreenG50: string;
+  GreenG300: string;
   GreenG500: string;
   RedR500: string;
   BlueB500: string;
