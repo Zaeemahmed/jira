@@ -39,6 +39,6 @@ ButtonStory.args = {
       />
     </svg>
   ),
-  iconBefore: true,
+  iconbefore: true,
   // href: '/www.google.com',
 };
