@@ -47,17 +47,17 @@ type ButtonsProps = ButtonProps & {
     | 'subtle'
     | 'subtleLink';
   Icon?: ReactElement;
-  iconBefore?: boolean;
+  iconbefore?: boolean;
   href?: string;
   isLoading?: boolean;
 };
 
 const StyledButtons = styled(Button)<ButtonsProps>(
-  ({ theme, appearance, iconBefore, disabled, href, isLoading }) => ({
+  ({ theme, appearance, iconbefore, disabled, href, isLoading }) => ({
     position: 'relative',
-    pointerEvents: disabled || isLoading   ? 'none' : 'auto',
+    pointerEvents: disabled || isLoading ? 'none' : 'auto',
     alignItems: 'center',
-    flexDirection: iconBefore ? 'row' : 'row-reverse',
+    flexDirection: iconbefore ? 'row' : 'row-reverse',
     gap: '4px',
     backgroundColor: ButtonAppearanceType[appearance],
     borderRadius: '3px',
@@ -114,7 +114,7 @@ export const Buttons = ({
   children,
   Icon,
   isLoading,
-  iconBefore,
+  iconbefore,
   ...prop
 }: ButtonsProps) => {
   return (
@@ -124,7 +124,7 @@ export const Buttons = ({
       {...prop}
       disableRipple={true}
       LinkComponent='a'
-      iconBefore={iconBefore}
+      iconbefore={iconbefore}
     >
       {isLoading ? (
         <Spinner />
