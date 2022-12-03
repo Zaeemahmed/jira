@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Flags } from '../../components/Flags';
 import { ThemeProvider } from '../../utils/ThemeProvider';
-import { SuccessIcon } from '../../components/Icons';
+import { Warning } from '../../components/Icons';
 import { theme } from '../../utils/theme';
 
 export default {
@@ -24,7 +24,7 @@ FlagsStory.args = {
   title: 'Good news, everyone',
   description: 'Nothing to worry about, everything is going great!',
   type: 'default',
-  icon: <SuccessIcon primaryColor={theme.palette.core.GreenG300} />,
+  icon: <Warning />,
   userAction: [
     {
       content: 'View issue',

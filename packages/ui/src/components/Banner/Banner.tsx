@@ -1,6 +1,7 @@
 import React, { ReactNode, ReactElement } from 'react';
 import { styled, Box } from '@mui/material';
 import { theme } from '../../utils/theme';
+import { Info, Warning, Error } from '../Icons';
 
 const AppearanceType = {
   warning: theme.palette.core.yellowY300,
@@ -8,10 +9,16 @@ const AppearanceType = {
   announcement: theme.palette.core.neutralN100,
 };
 
+const IconTypes = {
+  error: <Error />,
+  info: <Info />,
+  warning: <Warning />,
+};
+
 interface BannerProps {
   appearance: 'warning' | 'error' | 'announcement';
   children: ReactNode;
-  icon?: ReactElement;
+  icon: 'warning' | 'error' | 'info';
 }
 
 const StyledBanner = styled(Box)<BannerProps>(({ appearance }) => ({
@@ -32,10 +39,14 @@ const StyledBanner = styled(Box)<BannerProps>(({ appearance }) => ({
   },
 }));
 
-export const Banner = ({ appearance, children, icon }: BannerProps) => {
+export const Banner = ({
+  appearance,
+  children,
+  icon = 'info',
+}: BannerProps) => {
   return (
-    <StyledBanner appearance={appearance}>
-      {icon}
+    <StyledBanner appearance={appearance} icon={icon}>
+      {IconTypes[icon]}
       {children}
     </StyledBanner>
   );

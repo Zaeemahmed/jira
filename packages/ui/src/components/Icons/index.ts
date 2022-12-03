@@ -10,6 +10,9 @@ import { CrossIcon } from './CrossIcon';
 import { ChevronDown } from './ChevronDown';
 import { ChevronUp } from './ChevronUp';
 import { SuccessIcon } from './SuccessIcon';
+import { Warning } from './Warning';
+import { Info } from './Info';
+import { Error } from './Error';
 
 export {
   BrokenImage,
@@ -24,4 +27,7 @@ export {
   ChevronDown,
   ChevronUp,
   SuccessIcon,
+  Warning,
+  Info,
+  Error,
 };
