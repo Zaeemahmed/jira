@@ -24,6 +24,8 @@ const paletteOptions: PaletteOptions = {
     RedR50: '#FFEBE6',
     RedR500: '#BF2600',
     GreenG50: '#E3FCEF',
+    GreenG300: '#36B37E',
+    GreenG400: '#00875A',
     GreenG500: '#006644',
     neutralN20A: 'rgba(9, 30, 66, 0.04)',
     neutral30A: ' rgba(9, 30, 66, 0.08)',
