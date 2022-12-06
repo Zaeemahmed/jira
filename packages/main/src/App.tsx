@@ -1,8 +1,13 @@
+import { ApolloProvider } from "@apollo/client";
 import React from "react";
+import { apolloClient } from "./client";
+import { Users } from "./Users";
 
-const App = () => (
-  <div>
-    <h2>Hi from Main App</h2>
-  </div>
-);
+const App = () => {
+  return (
+    <ApolloProvider client={apolloClient}>
+      <Users />
+    </ApolloProvider>
+  );
+};
 export default App;
