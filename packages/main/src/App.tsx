@@ -1,12 +1,16 @@
-import { ApolloProvider } from "@apollo/client";
-import React from "react";
-import { apolloClient } from "./client";
-import { Users } from "./Users";
+import { ApolloProvider } from '@apollo/client';
+import React from 'react';
+import { apolloClient } from './client';
+import { ThemeProvider } from '../../ui/src/utils/ThemeProvider';
+import { Users } from './Users';
+import { SignUp } from './Pages/SignUp';
 
 const App = () => {
   return (
     <ApolloProvider client={apolloClient}>
-      <Users />
+      <ThemeProvider>
+        <SignUp />
+      </ThemeProvider>
     </ApolloProvider>
   );
 };
