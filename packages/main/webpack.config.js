@@ -37,7 +37,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       remotes: {
-        ui: "app2@http://localhost:3000/remoteEntry.js",
+        ui: "ui@http://localhost:3001/remoteEntry.js",
       },
       shared: {
         react: {

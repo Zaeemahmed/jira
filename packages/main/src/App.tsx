@@ -1,9 +1,8 @@
-import { ApolloProvider } from '@apollo/client';
-import React from 'react';
-import { apolloClient } from './client';
-import { ThemeProvider } from '../../ui/src/utils/ThemeProvider';
-import { Users } from './Users';
-import { SignUp } from './Pages/SignUp';
+import { ApolloProvider } from "@apollo/client";
+import React from "react";
+import { apolloClient } from "./client";
+import { ThemeProvider } from "ui/components";
+import { SignUp } from "./Pages/SignUp";
 
 const App = () => {
   return (

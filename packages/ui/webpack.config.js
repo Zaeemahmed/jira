@@ -36,7 +36,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "ui",
       filename: "remoteEntry.js",
-      exposes: {},
+      exposes: {
+        "./components": "./src/components/index.ts",
+      },
       shared: ["react", "react-dom"],
     }),
     new FederatedTypesPlugin(),
