@@ -1,0 +1,18 @@
+0 silly argv {
+0 silly argv   _: [ 'run' ],
+0 silly argv   parallel: true,
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'node_modules\\lerna\\cli.js',
+0 silly argv   script: 'install'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath C:\Users\pc\Desktop\Jira\jira
+3 error Error: Invalid tag name "npm install": Tags may not have any characters that encodeURIComponent encodes.
+3 error     at invalidTagName (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:91:15)
+3 error     at fromRegistry (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:296:13)
+3 error     at Function.resolve (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:81:12)
+3 error     at C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:61:30
+3 error     at Array.forEach (<anonymous>)
+3 error     at C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:55:38
+3 error     at Map.forEach (<anonymous>)
+3 error     at new PackageGraph (C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:44:10)
