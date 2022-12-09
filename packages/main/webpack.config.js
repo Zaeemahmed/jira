@@ -14,9 +14,10 @@ module.exports = {
     },
     port: 3000,
     hot: true,
+    historyApiFallback: true,
   },
   output: {
-    publicPath: "auto",
+    publicPath: "/",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
@@ -30,6 +31,18 @@ module.exports = {
         options: {
           presets: ["@babel/preset-react", "@babel/preset-typescript"],
         },
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "fonts/",
+            },
+          },
+        ],
       },
     ],
   },
