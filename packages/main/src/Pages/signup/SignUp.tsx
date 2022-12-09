@@ -1,61 +1,74 @@
-import React, { useEffect, useState } from "react";
-import { Logo, HookFormTextedField, Buttons } from "ui/components";
-import { Box, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { Logo, HookFormTextedField, Buttons, EmptyState } from 'ui/components';
+import emailjs from '@emailjs/browser';
+import { Box, Typography } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import {
   ButtonContainer,
   ElementContainer,
   StyledBox,
   StyledHeader,
   StyledSignUpContainer,
-} from "./styles";
+} from './styles';
 
 const SignUpScreen1 = ({ control }) => {
   return (
     <ElementContainer>
       <HookFormTextedField
-        labelText="Text"
+        labelText='Text'
         control={control}
-        name="email"
-        placeholder="Enter email"
+        name='email'
+        placeholder='Enter email'
         required
       />
     </ElementContainer>
   );
 };
 
-const SignUpScreen2 = ({ onClick }) => {
-  return <button onClick={onClick}>click me</button>;
+interface SignUpScreen1Props {
+  email: string;
+}
+
+const SignUpScreen2 = ({ email }: SignUpScreen1Props) => {
+  return (
+    <div>
+      <EmptyState
+        imageUrl='./email.svg'
+        header='Check your inbox to login'
+        description={`To complete setup and login, click the verification link in the email we have sent to:\n\t ${email}`}
+      />
+    </div>
+  );
 };
 
 const SignUpScreen3 = ({ control }) => {
   return (
     <>
-      <Box sx={{ width: "500px" }}>
+      <Box sx={{ width: '500px' }}>
         <HookFormTextedField
-          labelText="Text"
+          labelText='Text'
           control={control}
-          name="email"
-          placeholder="Enter email"
+          name='email'
+          placeholder='Enter email'
           disabled
         />
       </Box>
-      <Box sx={{ width: "500px" }}>
+      <Box sx={{ width: '500px' }}>
         <HookFormTextedField
-          labelText="Text"
+          labelText='Text'
           control={control}
-          name="name"
-          placeholder="Enter Full name"
+          name='name'
+          placeholder='Enter Full name'
         />
       </Box>
-      <Box sx={{ width: "500px" }}>
+      <Box sx={{ width: '500px' }}>
         <HookFormTextedField
-          labelText="Text"
+          labelText='Text'
           control={control}
-          name="password"
-          placeholder="Password"
-          type="password"
+          name='password'
+          placeholder='Password'
+          type='password'
         />
       </Box>
     </>
@@ -64,20 +77,45 @@ const SignUpScreen3 = ({ control }) => {
 
 export const SignUp = () => {
   const { control, handleSubmit, watch } = useForm();
+  const [email, setEmail] = useState('');
+  const form = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!watch("email")) {
-      navigate("/signup/");
+    if (!watch('email')) {
+      navigate('/signup/');
     }
   }, []);
 
+  // send email
+  const sendEmail = () => {
+    // e.preventDefault();
+    // console.log(form.current);
+    emailjs
+      .sendForm(
+        'service_a6idqxc',
+        'template_0q69ltk',
+        form.current!,
+        '7u4_esbk4V-OGdmnC',
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text, 'not send');
+        },
+      );
+  };
+
   const onSubmit = (data) => {
-    if (location.pathname === "/signup/") {
-      navigate("/signup/1");
-    } else if (location.pathname === "/signup/1") {
-      navigate("/signup/2");
+    if (location.pathname === '/signup/') {
+      sendEmail();
+      setEmail(data.email);
+      navigate('/signup/1');
+    } else if (location.pathname === '/signup/1') {
+      navigate('/signup/2');
     } else {
       console.log(data);
     }
@@ -86,27 +124,27 @@ export const SignUp = () => {
   return (
     <StyledSignUpContainer>
       <StyledHeader>
-        <Logo size="large" />
+        <Logo size='large' />
       </StyledHeader>
 
       <StyledBox>
-        <Typography textAlign="center" variant="h6">
+        <Typography textAlign='center' variant='h6'>
           sign up for your account
         </Typography>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form ref={form} onSubmit={handleSubmit(onSubmit)}>
           <Routes>
-            <Route path={"/"} element={<SignUpScreen1 control={control} />} />
-            <Route path={"/1"} element={<SignUpScreen2 onClick={() => {}} />} />
-            <Route path={"/2"} element={<SignUpScreen3 control={control} />} />
+            <Route path={'/'} element={<SignUpScreen1 control={control} />} />
+            <Route path={'/1'} element={<SignUpScreen2 email={email} />} />
+            <Route path={'/2'} element={<SignUpScreen3 control={control} />} />
           </Routes>
-          {location.pathname !== "/signup/1" && (
+          {location.pathname !== '/signup/1' && (
             <ElementContainer>
-              <Typography variant="body2" mt="20px">
-                By signing up, I accept the Atlassion Cloud Terms of service and
+              <Typography variant='body2' mt='20px'>
+                By signing up, I accept the Atlassian Cloud Terms of service and
                 acknowledge the privacy policy
               </Typography>
               <ButtonContainer>
-                <Buttons type="submit" appearance="primary">
+                <Buttons type='submit' appearance='primary'>
                   Sign up
                 </Buttons>
               </ButtonContainer>
