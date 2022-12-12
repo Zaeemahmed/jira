@@ -3,16 +3,22 @@
 0 silly argv   parallel: true,
 0 silly argv   lernaVersion: '3.22.1',
 0 silly argv   '$0': 'node_modules\\lerna\\cli.js',
-0 silly argv   script: 'install'
+0 silly argv   script: 'start'
 0 silly argv }
 1 notice cli v3.22.1
 2 verbose rootPath C:\Users\pc\Desktop\Jira\jira
-3 error Error: Invalid tag name "npm install": Tags may not have any characters that encodeURIComponent encodes.
-3 error     at invalidTagName (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:91:15)
-3 error     at fromRegistry (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:296:13)
-3 error     at Function.resolve (C:\Users\pc\Desktop\Jira\jira\node_modules\npm-package-arg\npa.js:81:12)
-3 error     at C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:61:30
-3 error     at Array.forEach (<anonymous>)
-3 error     at C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:55:38
-3 error     at Map.forEach (<anonymous>)
-3 error     at new PackageGraph (C:\Users\pc\Desktop\Jira\jira\node_modules\@lerna\package-graph\index.js:44:10)
+3 info Executing command in 2 packages: "npm run start"
+4 silly npmRunScript.stream [ 'start', [], 'main' ]
+5 silly getExecOpts C:\Users\pc\Desktop\Jira\jira\packages\main undefined
+6 silly npmRunScript.stream [ 'start', [], 'ui' ]
+7 silly getExecOpts C:\Users\pc\Desktop\Jira\jira\packages\ui undefined
+8 error MaxBufferError: stdout maxBuffer exceeded
+8 error     at PassThrough.<anonymous> (C:\Users\pc\Desktop\Jira\jira\node_modules\get-stream\index.js:41:19)
+8 error     at PassThrough.emit (node:events:525:35)
+8 error     at addChunk (node:internal/streams/readable:315:12)
+8 error     at readableAddChunk (node:internal/streams/readable:285:11)
+8 error     at PassThrough.Readable.push (node:internal/streams/readable:228:10)
+8 error     at node:internal/streams/transform:213:12
+8 error     at PassThrough._transform (node:internal/streams/passthrough:46:3)
+8 error     at PassThrough.Transform._write (node:internal/streams/transform:205:23)
+8 error     at writeOrBuffer (node:internal/streams/writable:391:12)
