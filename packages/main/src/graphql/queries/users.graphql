@@ -1,8 +1,7 @@
 query getUsers {
   users {
     id
-    firstName
-    lastName
+    fullName
     projects {
       id
     }

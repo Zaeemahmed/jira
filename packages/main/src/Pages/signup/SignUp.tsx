@@ -11,6 +11,7 @@ import {
   StyledHeader,
   StyledSignUpContainer,
 } from "./styles";
+import { useSignUpMutation } from "../../utils/__generated__/graphql";
 
 const SignUpScreen1 = ({ control }) => {
   return (
@@ -58,7 +59,7 @@ const SignUpScreen3 = ({ control }) => {
         <HookFormTextedField
           labelText="Text"
           control={control}
-          name="name"
+          name="fullName"
           placeholder="Enter Full name"
         />
       </ElementContainer>
@@ -77,6 +78,7 @@ const SignUpScreen3 = ({ control }) => {
 
 export const SignUp = () => {
   const { control, handleSubmit, watch, setValue } = useForm();
+  const [signUpUser, { loading, error }] = useSignUpMutation();
   const [email, setEmail] = useState<string>("");
   const form = useRef(null);
   const navigate = useNavigate();
@@ -111,7 +113,7 @@ export const SignUp = () => {
       );
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (location.pathname === "/signup/") {
       sendEmail();
       localStorage.setItem("email", data.email);
@@ -120,7 +122,11 @@ export const SignUp = () => {
     } else if (location.pathname === "/signup/1") {
       navigate("/signup/2");
     } else {
-      console.log(data);
+      try {
+        await signUpUser({ ...data });
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
