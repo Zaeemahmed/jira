@@ -38,6 +38,7 @@ const SignUpScreen2 = ({ email }: SignUpScreen1Props) => {
         header='Check your inbox to login'
         description={`To complete setup and login, click the verification link in the email we have sent to:\n\t ${email}`}
       />
+      <button onClick={()=> his}></button>
     </div>
   );
 };
@@ -77,7 +78,7 @@ const SignUpScreen3 = ({ control }) => {
 
 export const SignUp = () => {
   const { control, handleSubmit, watch } = useForm();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState<string>('');
   const form = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -112,6 +113,7 @@ export const SignUp = () => {
   const onSubmit = (data) => {
     if (location.pathname === '/signup/') {
       sendEmail();
+      localStorage.setItem('email', data.email);
       setEmail(data.email);
       navigate('/signup/1');
     } else if (location.pathname === '/signup/1') {
