@@ -76,15 +76,17 @@ const SignUpScreen3 = ({ control }) => {
 };
 
 export const SignUp = () => {
-  const { control, handleSubmit, watch } = useForm();
-  const [email, setEmail] = useState("");
+  const { control, handleSubmit, watch, setValue } = useForm();
+  const [email, setEmail] = useState<string>("");
   const form = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!watch("email")) {
+    if (!watch("email") && !localStorage.getItem("email")) {
       navigate("/signup/");
+    } else {
+      setValue("email", localStorage.getItem("email"));
     }
   }, []);
 
@@ -112,6 +114,7 @@ export const SignUp = () => {
   const onSubmit = (data) => {
     if (location.pathname === "/signup/") {
       sendEmail();
+      localStorage.setItem("email", data.email);
       setEmail(data.email);
       navigate("/signup/1");
     } else if (location.pathname === "/signup/1") {
