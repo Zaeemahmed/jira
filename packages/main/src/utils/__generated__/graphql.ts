@@ -145,7 +145,7 @@ export type SignUpMutationVariables = Exact<{
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthPayload', user?: { __typename?: 'User', id: string } | null } };
+export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string } | null } };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -158,7 +158,10 @@ export const SignUpDocument = gql`
   signup(email: $email, password: $password, fullName: $fullName) {
     user {
       id
+      fullName
+      email
     }
+    token
   }
 }
     `;

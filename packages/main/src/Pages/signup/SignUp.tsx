@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Logo, HookFormTextedField, Buttons, EmptyState } from "ui/components";
 import emailjs from "@emailjs/browser";
 import { Box, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+
 import {
   ButtonContainer,
   ElementContainer,
@@ -11,7 +12,8 @@ import {
   StyledHeader,
   StyledSignUpContainer,
 } from "./styles";
-import { useSignUpMutation } from "../../utils/__generated__/graphql";
+import { SignUpMutationVariables } from "../../utils/__generated__/graphql";
+import { AuthContext } from "../../context/Auth";
 
 const SignUpScreen1 = ({ control }) => {
   return (
@@ -34,11 +36,11 @@ interface SignUpScreen1Props {
 const SignUpScreen2 = ({ email }: SignUpScreen1Props) => {
   return (
     <div>
-      {/* <EmptyState
+      <EmptyState
         imageUrl="./email.svg"
         header="Check your inbox to login"
         description={`To complete setup and login, click the verification link in the email we have sent to:\n\t ${email}`}
-      /> */}
+      />
     </div>
   );
 };
@@ -77,18 +79,19 @@ const SignUpScreen3 = ({ control }) => {
 };
 
 export const SignUp = () => {
-  const { control, handleSubmit, watch, setValue } = useForm();
-  const [signUpUser, { loading, error }] = useSignUpMutation();
+  const { control, handleSubmit, watch, setValue } =
+    useForm<SignUpMutationVariables>();
   const [email, setEmail] = useState<string>("");
   const form = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     if (!watch("email") && !localStorage.getItem("email")) {
       navigate("/signup/");
     } else {
-      setValue("email", localStorage.getItem("email"));
+      setValue("email", localStorage.getItem("email") as string);
     }
   }, []);
 
@@ -113,7 +116,7 @@ export const SignUp = () => {
       );
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: SignUpMutationVariables) => {
     if (location.pathname === "/signup/") {
       sendEmail();
       localStorage.setItem("email", data.email);
@@ -122,11 +125,7 @@ export const SignUp = () => {
     } else if (location.pathname === "/signup/1") {
       navigate("/signup/2");
     } else {
-      try {
-        await signUpUser({ ...data });
-      } catch (e) {
-        console.log(e);
-      }
+      auth?.onSignup(data);
     }
   };
 
