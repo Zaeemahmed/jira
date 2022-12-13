@@ -5,14 +5,17 @@ import { ThemeProvider } from "ui/components";
 import { BrowserRouter } from "react-router-dom";
 
 import Main from "./Main";
+import { AuthProvider } from "./context/Auth";
 
 const App = () => {
   return (
     <BrowserRouter>
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider>
-          <Main />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <Main />
+          </ThemeProvider>
+        </AuthProvider>
       </ApolloProvider>
     </BrowserRouter>
   );

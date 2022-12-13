@@ -81,10 +81,8 @@ export type MutationLoginArgs = {
 
 export type MutationSignupArgs = {
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  fullName: Scalars['String'];
   password: Scalars['String'];
-  profileImage?: InputMaybe<Scalars['String']>;
 };
 
 export type Project = {
@@ -129,29 +127,77 @@ export type User = {
   __typename?: 'User';
   assignee?: Maybe<Array<Maybe<Issue>>>;
   email: Scalars['String'];
-  firstName: Scalars['String'];
+  fullName: Scalars['String'];
   id: Scalars['String'];
   issues?: Maybe<Array<Maybe<Issue>>>;
-  lastName: Scalars['String'];
   password: Scalars['String'];
   profileImage?: Maybe<Scalars['String']>;
   projectLead?: Maybe<Array<Maybe<Project>>>;
   projects?: Maybe<Array<Maybe<Project>>>;
   reporter?: Maybe<Array<Maybe<Issue>>>;
+  site?: Maybe<Scalars['String']>;
 };
+
+export type SignUpMutationVariables = Exact<{
+  email: Scalars['String'];
+  fullName: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string } | null } };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, firstName: string, lastName: string, projects?: Array<{ __typename?: 'Project', id: string } | null> | null }> };
+export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, fullName: string, projects?: Array<{ __typename?: 'Project', id: string } | null> | null }> };
 
 
+export const SignUpDocument = gql`
+    mutation SignUp($email: String!, $fullName: String!, $password: String!) {
+  signup(email: $email, password: $password, fullName: $fullName) {
+    user {
+      id
+      fullName
+      email
+    }
+    token
+  }
+}
+    `;
+export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+
+/**
+ * __useSignUpMutation__
+ *
+ * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      fullName: // value for 'fullName'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+      }
+export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
+export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const GetUsersDocument = gql`
     query getUsers {
   users {
     id
-    firstName
-    lastName
+    fullName
     projects {
       id
     }
