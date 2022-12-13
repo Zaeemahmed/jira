@@ -8,7 +8,10 @@ import { LogoJira } from './Logo/LogoJira';
 import { EmptyState } from './EmptyState';
 import { TextInputField, HookFormTextedField } from '../components/TextField';
 import { ThemeProvider } from '../utils/ThemeProvider';
-
+import { Notification } from './Icons';
+import { Question } from './Icons';
+import { Settings } from './Icons';
+import { ProfileIcon } from './Icons';
 export {
   Avatars,
   Badge,
@@ -21,4 +24,8 @@ export {
   HookFormTextedField,
   EmptyState,
   LogoJira,
+  Notification,
+  Question,
+  Settings,
+  ProfileIcon,
 };

@@ -13,6 +13,10 @@ import { SuccessIcon } from './SuccessIcon';
 import { Warning } from './Warning';
 import { Info } from './Info';
 import { Error } from './Error';
+import { Notification } from './Notification';
+import { Question } from './Question';
+import { Settings } from './Settings';
+import { ProfileIcon } from './ProfileIcon';
 
 export {
   BrokenImage,
@@ -30,4 +34,8 @@ export {
   Warning,
   Info,
   Error,
+  Notification,
+  Question,
+  Settings,
+  ProfileIcon,
 };

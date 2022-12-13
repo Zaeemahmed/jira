@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 export const OnlineIcon = () => {
   return (
@@ -13,7 +13,7 @@ export const OnlineIcon = () => {
       <rect
         x='1'
         y='1'
-        width='16'  
+        width='16'
         height='16'
         rx='8'
         stroke='white'
