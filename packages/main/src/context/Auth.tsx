@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren } from "react";
+import React, { createContext, PropsWithChildren, useEffect } from "react";
 import {
   SignUpMutationVariables,
   User,
@@ -19,6 +19,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [signUpUser, { loading, error }] = useSignUpMutation();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
 
   const handleLogin = async () => {};
 

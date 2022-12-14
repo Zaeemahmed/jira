@@ -126,6 +126,8 @@ export const SignUp = () => {
       navigate("/signup/2");
     } else {
       auth?.onSignup(data);
+      localStorage.removeItem("email");
+      navigate("/");
     }
   };
 
