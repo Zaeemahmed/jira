@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const handleLogout = () => {
     setToken(null);
     setUser(null);
+    localStorage.removeItem("token");
     navigate("/login");
   };
 

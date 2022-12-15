@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Logo, HookFormTextedField, Buttons, EmptyState } from "ui/components";
 import emailjs from "@emailjs/browser";
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import {
   Route,
@@ -20,6 +20,7 @@ import {
 } from "./styles";
 import { SignUpMutationVariables } from "../../utils/__generated__/graphql";
 import { AuthContext } from "../../context/Auth";
+import EmailSvg from "./email.svg";
 
 const SignUpScreen1 = ({ control }) => {
   return (
@@ -43,7 +44,7 @@ const SignUpScreen2 = ({ email }: SignUpScreen1Props) => {
   return (
     <div>
       <EmptyState
-        imageUrl="./email.svg"
+        renderImage={<EmailSvg />}
         header="Check your inbox to login"
         description={`To complete setup and login, click the verification link in the email we have sent to:\n\t ${email}`}
       />
@@ -169,12 +170,26 @@ export const SignUp = () => {
                 </Typography>
                 <ButtonContainer>
                   <Buttons type="submit" appearance="primary">
-                    Sign up
+                    <Typography
+                      variant="body2"
+                      fontWeight="500"
+                      fontSize="16px"
+                    >
+                      Sign up
+                    </Typography>
                   </Buttons>
                 </ButtonContainer>
               </ElementContainer>
               <ElementContainer>
-                <Typography textAlign="center" variant="h6">
+                <Box mt="20px">
+                  <Divider />
+                </Box>
+              </ElementContainer>
+              <ElementContainer>
+                <Typography textAlign="center" variant="body2">
+                  OR
+                </Typography>
+                <Typography textAlign="center" variant="body2">
                   Already have an account ? <Link to="/login">login</Link>
                 </Typography>
               </ElementContainer>
