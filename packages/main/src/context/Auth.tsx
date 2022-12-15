@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
+      setUser(JSON.parse(localStorage.getItem("user") as string));
     }
     setInitialized(true);
   }, []);
@@ -45,6 +46,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       const response = await loginUser({ variables: data });
       const obj = response?.data?.login;
       localStorage.setItem("token", obj?.token as string);
+      localStorage.setItem("user", JSON.stringify(obj?.user));
       setToken(obj?.token);
       setUser(obj?.user);
       navigate("/");
@@ -57,6 +59,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
@@ -65,6 +68,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       const response = await signUpUser({ variables: data });
       const obj = response?.data?.signup;
       localStorage.setItem("token", obj?.token as string);
+      localStorage.setItem("user", JSON.stringify(obj?.user));
       setToken(obj?.token);
       setUser(obj?.user);
       navigate("/");

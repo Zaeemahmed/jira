@@ -11,11 +11,10 @@ import {
   Avatars,
 } from "ui/components";
 import { AuthContext } from "../../context/Auth";
+import { User } from "../../utils/__generated__/graphql";
 
 interface renderDropDownMenuProps {
-  userAvatarImage: string;
-  userEmail: string;
-  userName: string;
+  user?: User;
 }
 
 const StyledDropDownMenu = styled("div")(() => ({
@@ -34,19 +33,15 @@ const StyledListMenu = styled("ul")(() => ({
   },
 }));
 
-const RenderDropDownMenu = ({
-  userAvatarImage,
-  userEmail,
-  userName,
-}: renderDropDownMenuProps) => {
+const RenderDropDownMenu = ({ user }: renderDropDownMenuProps) => {
   const auth = React.useContext(AuthContext);
   return (
     <StyledDropDownMenu>
       <div>
-        <Avatars src={userAvatarImage} size="normal" />
+        <Avatars src={user?.profileImage} size="normal" />
         <div>
-          <h5>{userName}</h5>
-          <p>{userEmail}</p>
+          <h5>{user?.fullName}</h5>
+          <p>{user?.email}</p>
         </div>
       </div>
       <StyledListMenu>
@@ -59,13 +54,7 @@ const RenderDropDownMenu = ({
   );
 };
 
-interface NavBarProps {
-  imageUrl: string;
-  name: string;
-  email: string;
-}
-
-export const NavBar = ({ imageUrl, name, email }: NavBarProps) => {
+export const NavBar = ({ user }: renderDropDownMenuProps) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   const handleMenuOpen = () => {
@@ -74,7 +63,7 @@ export const NavBar = ({ imageUrl, name, email }: NavBarProps) => {
 
   return (
     <Box sx={{ flexGrow: 1, position: "relative" }}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent">
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
             <Logo size="small" />
@@ -110,13 +99,7 @@ export const NavBar = ({ imageUrl, name, email }: NavBarProps) => {
           </Box>
         </Toolbar>
       </AppBar>
-      {menuOpen && (
-        <RenderDropDownMenu
-          userAvatarImage={imageUrl}
-          userEmail={email}
-          userName={name}
-        />
-      )}
+      {menuOpen && <RenderDropDownMenu user={user} />}
     </Box>
   );
 };
