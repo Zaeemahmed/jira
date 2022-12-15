@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { SignUp } from "./Pages/signup/SignUp";
 import { UserMainPage } from "./Pages/home/UserMainPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { SignIn } from "./Pages/signin/Signin";
 const Main = () => {
   return (
     <Routes>
@@ -15,7 +16,7 @@ const Main = () => {
         }
       />
       <Route path="/signup/*" element={<SignUp />} />
-      <Route path="/test" element={<SignUp />} />
+      <Route path="/login" element={<SignIn />} />
     </Routes>
   );
 };

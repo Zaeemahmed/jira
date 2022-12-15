@@ -1,6 +1,14 @@
-import React, { createContext, PropsWithChildren, useEffect } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import {
+  LoginMutationVariables,
   SignUpMutationVariables,
+  useLoginMutation,
   User,
   useSignUpMutation,
 } from "../utils/__generated__/graphql";
@@ -8,8 +16,9 @@ import {
 export interface AuthContextType {
   token?: string;
   user?: User;
+  initialized?: boolean;
   onSignup: (data: SignUpMutationVariables) => void;
-  onLogin: () => void;
+  onLogin: (data: LoginMutationVariables) => void;
   onLogout: () => void;
 }
 
@@ -18,19 +27,36 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
-  const [signUpUser, { loading, error }] = useSignUpMutation();
+  const [initialized, setInitialized] = useState(false);
+  const [signUpUser] = useSignUpMutation();
+  const [loginUser] = useLoginMutation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
     }
+    setInitialized(true);
   }, []);
 
-  const handleLogin = async () => {};
+  const handleLogin = async (data: LoginMutationVariables) => {
+    try {
+      const response = await loginUser({ variables: data });
+      const obj = response?.data?.login;
+      localStorage.setItem("token", obj?.token as string);
+      setToken(obj?.token);
+      setUser(obj?.user);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleLogout = () => {
     setToken(null);
     setUser(null);
+    navigate("/login");
   };
 
   const handleSignup = async (data: SignUpMutationVariables) => {
@@ -40,6 +66,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("token", obj?.token as string);
       setToken(obj?.token);
       setUser(obj?.user);
+      navigate("/");
     } catch (e) {
       console.log(e);
     }
@@ -51,6 +78,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onLogin: handleLogin,
     onLogout: handleLogout,
     onSignup: handleSignup,
+    initialized,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

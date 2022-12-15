@@ -3,7 +3,13 @@ import { Logo, HookFormTextedField, Buttons, EmptyState } from "ui/components";
 import emailjs from "@emailjs/browser";
 import { Box, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Link,
+} from "react-router-dom";
 
 import {
   ButtonContainer,
@@ -127,9 +133,16 @@ export const SignUp = () => {
     } else {
       auth?.onSignup(data);
       localStorage.removeItem("email");
-      navigate("/");
     }
   };
+
+  if (!auth?.initialized) {
+    return <>Loading....</>;
+  }
+
+  if (auth?.token) {
+    navigate("/");
+  }
 
   return (
     <StyledSignUpContainer>
@@ -148,17 +161,24 @@ export const SignUp = () => {
             <Route path={"/2"} element={<SignUpScreen3 control={control} />} />
           </Routes>
           {location.pathname !== "/signup/1" && (
-            <ElementContainer>
-              <Typography variant="body2" mt="20px">
-                By signing up, I accept the Atlassian Cloud Terms of service and
-                acknowledge the privacy policy
-              </Typography>
-              <ButtonContainer>
-                <Buttons type="submit" appearance="primary">
-                  Sign up
-                </Buttons>
-              </ButtonContainer>
-            </ElementContainer>
+            <>
+              <ElementContainer>
+                <Typography variant="body2" mt="20px">
+                  By signing up, I accept the Atlassian Cloud Terms of service
+                  and acknowledge the privacy policy
+                </Typography>
+                <ButtonContainer>
+                  <Buttons type="submit" appearance="primary">
+                    Sign up
+                  </Buttons>
+                </ButtonContainer>
+              </ElementContainer>
+              <ElementContainer>
+                <Typography textAlign="center" variant="h6">
+                  Already have an account ? <Link to="/login">login</Link>
+                </Typography>
+              </ElementContainer>
+            </>
           )}
         </form>
       </StyledBox>
