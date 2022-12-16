@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Box, Toolbar, IconButton, Typography } from "@mui/material";
 import {
   Logo,
@@ -56,6 +56,7 @@ const RenderDropDownMenu = ({ user }: renderDropDownMenuProps) => {
 
 export const NavBar = ({ user }: renderDropDownMenuProps) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleMenuOpen = () => {
     setMenuOpen((prev) => !prev);
@@ -65,7 +66,15 @@ export const NavBar = ({ user }: renderDropDownMenuProps) => {
     <Box sx={{ flexGrow: 1, position: "relative" }}>
       <AppBar position="static" color="transparent">
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            onClick={() => {
+              navigate("/");
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <Logo size="small" />
           </Typography>
 

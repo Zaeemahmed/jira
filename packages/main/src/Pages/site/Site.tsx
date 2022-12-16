@@ -4,6 +4,7 @@ import { LogoJira, HookFormTextedField, Buttons, Logo } from "ui/components";
 import { useForm } from "react-hook-form";
 import { Box } from "@mui/system";
 import { AuthContext } from "../../context/Auth";
+import { Layout } from "../../components/Layout";
 
 const StyledSite = styled("div")(() => ({
   height: "100vh",
@@ -70,48 +71,50 @@ export const Site = () => {
   const handleOnSubmit = () => {};
 
   return (
-    <StyledSite>
-      <header>
-        <LogoJira size="large" />
-        <p>Cloud Free</p>
-      </header>
-      <StyledFormContainer>
-        <Typography variant="h5">
-          Welcome back, {auth?.user?.fullName}
-        </Typography>
-        <form onSubmit={handleSubmit(handleOnSubmit)}>
-          <StyledInputContainer>
-            <HookFormTextedField
-              hasLabel
-              labelText="Work email"
-              control={control}
-              name="email"
-              placeholder="Enter email"
-              disabled
-            />
-          </StyledInputContainer>
-          <StyledInputContainer>
-            <HookFormTextedField
-              hasLabel
-              labelText="Your site"
-              control={control}
-              name="site"
-              placeholder=""
-              type="text"
-            />
-          </StyledInputContainer>
+    <Layout>
+      <StyledSite>
+        <header>
+          <LogoJira size="large" />
+          <p>Cloud Free</p>
+        </header>
+        <StyledFormContainer>
+          <Typography variant="h5">
+            Welcome back, {auth?.user?.fullName}
+          </Typography>
+          <form onSubmit={handleSubmit(handleOnSubmit)}>
+            <StyledInputContainer>
+              <HookFormTextedField
+                hasLabel
+                labelText="Work email"
+                control={control}
+                name="email"
+                placeholder="Enter email"
+                disabled
+              />
+            </StyledInputContainer>
+            <StyledInputContainer>
+              <HookFormTextedField
+                hasLabel
+                labelText="Your site"
+                control={control}
+                name="site"
+                placeholder=""
+                type="text"
+              />
+            </StyledInputContainer>
 
-          <p>
-            By clicking below, you agree to the Atlassian Cloud Terms of Service
-            and Privacy Policy.
-          </p>
-          <Buttons type="submit" appearance="primary" disabled>
-            Agree
-          </Buttons>
-        </form>
-        <Typography variant="h4">NO CREDIT REQUIRED</Typography>
-        <Logo size="small" />
-      </StyledFormContainer>
-    </StyledSite>
+            <p>
+              By clicking below, you agree to the Atlassian Cloud Terms of
+              Service and Privacy Policy.
+            </p>
+            <Buttons type="submit" appearance="primary" disabled>
+              Agree
+            </Buttons>
+          </form>
+          <Typography variant="h4">NO CREDIT REQUIRED</Typography>
+          <Logo size="small" />
+        </StyledFormContainer>
+      </StyledSite>
+    </Layout>
   );
 };
