@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { NavBar } from "./NavBar";
-import { AuthContext } from "../../context/Auth";
+import React from "react";
+import { Layout } from "../../components/Layout";
+import { Products } from "./Products";
 
 export function UserMainPage() {
-  const auth = useContext(AuthContext);
-
   return (
-    <div>
-      <NavBar user={auth?.user} />
-    </div>
+    <Layout>
+      <Products />
+    </Layout>
   );
 }

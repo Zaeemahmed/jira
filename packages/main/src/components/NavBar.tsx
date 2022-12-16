@@ -10,8 +10,8 @@ import {
   ProfileIcon,
   Avatars,
 } from "ui/components";
-import { AuthContext } from "../../context/Auth";
-import { User } from "../../utils/__generated__/graphql";
+import { AuthContext } from "../context/Auth";
+import { User } from "../utils/__generated__/graphql";
 
 interface renderDropDownMenuProps {
   user?: User;

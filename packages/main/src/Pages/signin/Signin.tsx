@@ -25,73 +25,9 @@ import {
 } from "../../utils/__generated__/graphql";
 import { AuthContext } from "../../context/Auth";
 
-const SignUpScreen1 = ({ control }) => {
-  return (
-    <ElementContainer>
-      <HookFormTextedField
-        labelText="Text"
-        control={control}
-        name="email"
-        placeholder="Enter email"
-        required
-      />
-    </ElementContainer>
-  );
-};
-
-interface SignUpScreen1Props {
-  email: string;
-}
-
-const SignUpScreen2 = ({ email }: SignUpScreen1Props) => {
-  return (
-    <div>
-      <EmptyState
-        imageUrl="./email.svg"
-        header="Check your inbox to login"
-        description={`To complete setup and login, click the verification link in the email we have sent to:\n\t ${email}`}
-      />
-    </div>
-  );
-};
-
-const SignUpScreen3 = ({ control }) => {
-  return (
-    <>
-      <ElementContainer>
-        <HookFormTextedField
-          labelText="Text"
-          control={control}
-          name="email"
-          placeholder="Enter email"
-          disabled
-        />
-      </ElementContainer>
-      <ElementContainer>
-        <HookFormTextedField
-          labelText="Text"
-          control={control}
-          name="fullName"
-          placeholder="Enter Full name"
-        />
-      </ElementContainer>
-      <ElementContainer>
-        <HookFormTextedField
-          labelText="Text"
-          control={control}
-          name="password"
-          placeholder="Password"
-          type="password"
-        />
-      </ElementContainer>
-    </>
-  );
-};
-
 export const SignIn = () => {
   const { control, handleSubmit, watch } = useForm<LoginMutationVariables>();
   const [getUser] = useGetUserLazyQuery();
-  const [login] = useLoginMutation();
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -151,12 +87,13 @@ export const SignIn = () => {
               />
             </ElementContainer>
           )}
-
-          <ButtonContainer>
-            <Buttons type="submit" appearance="primary">
-              Sign in
-            </Buttons>
-          </ButtonContainer>
+          <ElementContainer>
+            <ButtonContainer>
+              <Buttons type="submit" appearance="primary">
+                Sign in
+              </Buttons>
+            </ButtonContainer>
+          </ElementContainer>
 
           <ElementContainer>
             <Typography textAlign="center" variant="h6">
