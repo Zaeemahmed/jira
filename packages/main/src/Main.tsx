@@ -4,6 +4,7 @@ import { SignUp } from "./Pages/signup/SignUp";
 import { UserMainPage } from "./Pages/home/UserMainPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SignIn } from "./Pages/signin/Signin";
+import { Site } from "./Pages/site/Site";
 const Main = () => {
   return (
     <Routes>
@@ -17,6 +18,14 @@ const Main = () => {
       />
       <Route path="/signup/*" element={<SignUp />} />
       <Route path="/login" element={<SignIn />} />
+      <Route
+        path="/createSite"
+        element={
+          <ProtectedRoute>
+            <Site />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };

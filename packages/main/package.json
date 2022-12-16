@@ -37,6 +37,7 @@
     "@graphql-codegen/typescript-operations": "^2.5.8",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@module-federation/typescript": "^0.1.8",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.10.17",
     "@types/node": "^18.11.12",
     "graphql": "^16.6.0",
