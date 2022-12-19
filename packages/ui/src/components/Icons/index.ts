@@ -17,6 +17,7 @@ import { Notification } from './Notification';
 import { Question } from './Question';
 import { Settings } from './Settings';
 import { ProfileIcon } from './ProfileIcon';
+import { SignIn } from './SignIn';
 
 export {
   BrokenImage,
@@ -38,4 +39,5 @@ export {
   Question,
   Settings,
   ProfileIcon,
+  SignIn,
 };

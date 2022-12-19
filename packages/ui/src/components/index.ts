@@ -12,6 +12,7 @@ import { Notification } from './Icons';
 import { Question } from './Icons';
 import { Settings } from './Icons';
 import { ProfileIcon } from './Icons';
+import { SignIn } from './Icons';
 export {
   Avatars,
   Badge,
@@ -28,4 +29,5 @@ export {
   Question,
   Settings,
   ProfileIcon,
+  SignIn,
 };

@@ -6,6 +6,7 @@ interface profileProps {
 }
 
 const StyledProfileIcon = styled('div')(({ theme }) => ({
+  color: '#ffff',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -17,5 +18,5 @@ const StyledProfileIcon = styled('div')(({ theme }) => ({
 }));
 
 export const ProfileIcon = ({ nameFirstLetter }: profileProps) => {
-  return <StyledProfileIcon>{nameFirstLetter.slice(0, 1)}</StyledProfileIcon>;
+  return <StyledProfileIcon>{nameFirstLetter?.slice(0, 1)}</StyledProfileIcon>;
 };
