@@ -1,0 +1,7 @@
+mutation SetUserSite($email: String!, $site: String!) {
+  setUserSite(email: $email, site: $site) {
+    id
+    fullName
+    email
+  }
+}

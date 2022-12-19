@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import {
   LoginMutationVariables,
   SignUpMutationVariables,
+  useGetUserQuery,
   useLoginMutation,
   User,
   useSignUpMutation,
@@ -20,6 +21,7 @@ export interface AuthContextType {
   onSignup: (data: SignUpMutationVariables) => void;
   onLogin: (data: LoginMutationVariables) => void;
   onLogout: () => void;
+  updateUser: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -40,6 +42,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
     setInitialized(true);
   }, []);
+
+  const updateUser = async () => {
+    const updatedUser = await useGetUserQuery({ variables: user.email });
+    localStorage.setItem("user", JSON.stringify(updatedUser.data?.getUser));
+    setUser(updatedUser.data?.getUser);
+  };
 
   const handleLogin = async (data: LoginMutationVariables) => {
     try {
@@ -84,6 +92,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onLogout: handleLogout,
     onSignup: handleSignup,
     initialized,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

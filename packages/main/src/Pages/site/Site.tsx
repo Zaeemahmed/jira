@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { styled, Paper, PaperProps, Typography } from "@mui/material";
 import { LogoJira, HookFormTextedField, Buttons, Logo } from "ui/components";
 import { useForm } from "react-hook-form";
 import { Box } from "@mui/system";
 import { AuthContext } from "../../context/Auth";
 import { Layout } from "../../components/Layout";
+import {
+  refetchGetUserQuery,
+  SetUserSiteMutationVariables,
+  useSetUserSiteMutation,
+} from "../../utils/__generated__/graphql";
+import { useNavigate } from "react-router-dom";
 
 const StyledSite = styled("div")(() => ({
   height: "100vh",
@@ -62,13 +68,38 @@ const StyledInputContainer = styled(Box)(({}) => ({
 
 export const Site = () => {
   const auth = useContext(AuthContext);
-  const { control, handleSubmit, watch, setValue } = useForm({
-    defaultValues: {
-      email: auth?.user?.email || "",
-    },
-  });
+  const navigate = useNavigate();
+  const [setUserSite, { loading }] = useSetUserSiteMutation({});
+  const { control, handleSubmit, watch } =
+    useForm<SetUserSiteMutationVariables>({
+      defaultValues: {
+        email: auth?.user?.email || "",
+      },
+    });
 
-  const handleOnSubmit = () => {};
+  const siteName = watch("site");
+
+  const handleOnSubmit = async (data: SetUserSiteMutationVariables) => {
+    try {
+      await setUserSite({ variables: data });
+      auth?.updateUser();
+      navigate("/createFirstProject");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    if (!!auth?.user?.site) {
+      navigate("/createFirstProject");
+    }
+  }, []);
+
+  //console.log(!auth?.initialized);
+
+  if (!auth?.initialized) {
+    return <>Loading</>;
+  }
 
   return (
     <Layout>
@@ -107,11 +138,11 @@ export const Site = () => {
               By clicking below, you agree to the Atlassian Cloud Terms of
               Service and Privacy Policy.
             </p>
-            <Buttons type="submit" appearance="primary" disabled>
+            <Buttons type="submit" appearance="primary" disabled={!siteName}>
               Agree
             </Buttons>
           </form>
-          <Typography variant="h4">NO CREDIT REQUIRED</Typography>
+          <Typography variant="h6">NO CREDIT REQUIRED</Typography>
           <Logo size="small" />
         </StyledFormContainer>
       </StyledSite>

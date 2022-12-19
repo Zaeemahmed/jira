@@ -14,10 +14,43 @@ export const CreateSite = () => {
   );
 };
 
+export const Project = ({
+  numberOfProjects,
+  site,
+}: {
+  numberOfProjects?: Number;
+  site?: String;
+}) => {
+  const navigate = useNavigate();
+  return (
+    <Buttons
+      onClick={() =>
+        numberOfProjects === 0 || !numberOfProjects
+          ? navigate("/createFirstProject")
+          : navigate(`/${site}`)
+      }
+      appearance="primary"
+    >
+      Create Project <AddCircleOutlineOutlinedIcon />
+    </Buttons>
+  );
+};
+
 export function Projects() {
   const auth = useContext(AuthContext);
 
   let userProject = auth?.user?.projects || [];
 
-  return <Container>{userProject.length === 0 && <CreateSite />}</Container>;
+  return (
+    <Container>
+      {!auth?.user?.site ? (
+        <CreateSite />
+      ) : (
+        <Project
+          numberOfProjects={auth?.user?.projects?.length}
+          site={auth?.user?.site}
+        />
+      )}
+    </Container>
+  );
 }

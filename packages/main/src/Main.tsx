@@ -5,6 +5,8 @@ import { UserMainPage } from "./Pages/home/UserMainPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SignIn } from "./Pages/signin/Signin";
 import { Site } from "./Pages/site/Site";
+import { CreateFirstProject } from "./Pages/createproject/CreateFirstProject";
+
 const Main = () => {
   return (
     <Routes>
@@ -13,6 +15,14 @@ const Main = () => {
         element={
           <ProtectedRoute>
             <UserMainPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/createFirstProject"
+        element={
+          <ProtectedRoute>
+            <CreateFirstProject />
           </ProtectedRoute>
         }
       />

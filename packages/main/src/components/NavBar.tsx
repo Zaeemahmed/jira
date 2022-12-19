@@ -19,10 +19,10 @@ interface renderDropDownMenuProps {
 
 const StyledDropDownMenu = styled("div")(() => ({
   backgroundColor: "#ffff",
-  height: "100px",
   position: "absolute",
   right: "30px",
   top: "55px",
+  zIndex: "10",
 }));
 
 const StyledListMenu = styled("ul")(() => ({

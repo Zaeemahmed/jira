@@ -45,6 +45,7 @@ export type Mutation = {
   createSprint: Sprint;
   issueCreate: Issue;
   login: AuthPayload;
+  setUserSite?: Maybe<User>;
   signup: AuthPayload;
 };
 
@@ -76,6 +77,12 @@ export type MutationIssueCreateArgs = {
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationSetUserSiteArgs = {
+  email: Scalars['String'];
+  site: Scalars['String'];
 };
 
 
@@ -144,6 +151,14 @@ export type User = {
   site?: Maybe<Scalars['String']>;
 };
 
+export type CreateProjectMutationVariables = Exact<{
+  name: Scalars['String'];
+  key: Scalars['String'];
+}>;
+
+
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'Project', id: string } };
+
 export type SignUpMutationVariables = Exact<{
   email: Scalars['String'];
   fullName: Scalars['String'];
@@ -159,7 +174,15 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string } | null } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string, site?: string | null } | null } };
+
+export type SetUserSiteMutationVariables = Exact<{
+  email: Scalars['String'];
+  site: Scalars['String'];
+}>;
+
+
+export type SetUserSiteMutation = { __typename?: 'Mutation', setUserSite?: { __typename?: 'User', id: string, fullName: string, email: string } | null };
 
 export type GetUserQueryVariables = Exact<{
   email: Scalars['String'];
@@ -174,6 +197,40 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, fullName: string, projects?: Array<{ __typename?: 'Project', id: string } | null> | null }> };
 
 
+export const CreateProjectDocument = gql`
+    mutation CreateProject($name: String!, $key: String!) {
+  createProject(name: $name, key: $key) {
+    id
+  }
+}
+    `;
+export type CreateProjectMutationFn = Apollo.MutationFunction<CreateProjectMutation, CreateProjectMutationVariables>;
+
+/**
+ * __useCreateProjectMutation__
+ *
+ * To run a mutation, you first call `useCreateProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProjectMutation, { data, loading, error }] = useCreateProjectMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateProjectMutation, CreateProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProjectMutation, CreateProjectMutationVariables>(CreateProjectDocument, options);
+      }
+export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
+export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
+export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
 export const SignUpDocument = gql`
     mutation SignUp($email: String!, $fullName: String!, $password: String!) {
   signup(email: $email, password: $password, fullName: $fullName) {
@@ -222,6 +279,7 @@ export const LoginDocument = gql`
       id
       fullName
       email
+      site
     }
   }
 }
@@ -253,6 +311,42 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const SetUserSiteDocument = gql`
+    mutation SetUserSite($email: String!, $site: String!) {
+  setUserSite(email: $email, site: $site) {
+    id
+    fullName
+    email
+  }
+}
+    `;
+export type SetUserSiteMutationFn = Apollo.MutationFunction<SetUserSiteMutation, SetUserSiteMutationVariables>;
+
+/**
+ * __useSetUserSiteMutation__
+ *
+ * To run a mutation, you first call `useSetUserSiteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetUserSiteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setUserSiteMutation, { data, loading, error }] = useSetUserSiteMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      site: // value for 'site'
+ *   },
+ * });
+ */
+export function useSetUserSiteMutation(baseOptions?: Apollo.MutationHookOptions<SetUserSiteMutation, SetUserSiteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetUserSiteMutation, SetUserSiteMutationVariables>(SetUserSiteDocument, options);
+      }
+export type SetUserSiteMutationHookResult = ReturnType<typeof useSetUserSiteMutation>;
+export type SetUserSiteMutationResult = Apollo.MutationResult<SetUserSiteMutation>;
+export type SetUserSiteMutationOptions = Apollo.BaseMutationOptions<SetUserSiteMutation, SetUserSiteMutationVariables>;
 export const GetUserDocument = gql`
     query GetUser($email: String!) {
   getUser(email: $email) {
