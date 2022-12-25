@@ -8,22 +8,24 @@ import { Layout } from "../../components/Layout";
 import { useNavigate } from "react-router-dom";
 import { ButtonContainer, Container } from "./styles";
 import skeleton from "./jiraSkeleton.png";
+import {
+  CreateProjectMutationVariables,
+  useCreateProjectMutation,
+} from "../../utils/__generated__/graphql";
 
 export const CreateFirstProject = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm({});
+  const { control, handleSubmit } = useForm<CreateProjectMutationVariables>({});
+  const [createProject] = useCreateProjectMutation();
 
-  const handleOnSubmit = async (data) => {
+  const handleOnSubmit = async (data: CreateProjectMutationVariables) => {
     try {
+      await createProject({ variables: data });
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.pathname);
-  }, []);
 
   return (
     <Layout>
@@ -38,7 +40,7 @@ export const CreateFirstProject = () => {
               hasLabel
               labelText="Name"
               control={control}
-              name="projectName"
+              name="name"
               placeholder="Project Name"
             />
           </Box>

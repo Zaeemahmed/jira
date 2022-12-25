@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SignIn } from "./Pages/signin/Signin";
 import { Site } from "./Pages/site/Site";
 import { CreateFirstProject } from "./Pages/createproject/CreateFirstProject";
+import { Projects } from "./Pages/projects/Projects";
 
 const Main = () => {
   return (
@@ -23,6 +24,14 @@ const Main = () => {
         element={
           <ProtectedRoute>
             <CreateFirstProject />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path=":id/atlassion.net/jira/projects"
+        element={
+          <ProtectedRoute>
+            <Projects />
           </ProtectedRoute>
         }
       />
