@@ -14,23 +14,10 @@ export const CreateSite = () => {
   );
 };
 
-export const Project = ({
-  numberOfProjects,
-  site,
-}: {
-  numberOfProjects?: Number;
-  site?: String;
-}) => {
+export const Project = () => {
   const navigate = useNavigate();
   return (
-    <Buttons
-      onClick={() =>
-        numberOfProjects === 0 || !numberOfProjects
-          ? navigate("/createFirstProject")
-          : navigate(`/${site}`)
-      }
-      appearance="primary"
-    >
+    <Buttons onClick={() => navigate(`/createProject`)} appearance="primary">
       Create Project <AddCircleOutlineOutlinedIcon />
     </Buttons>
   );
@@ -39,18 +26,7 @@ export const Project = ({
 export function Projects() {
   const auth = useContext(AuthContext);
 
-  let userProject = auth?.user?.projects || [];
-
   return (
-    <Container>
-      {!auth?.user?.site ? (
-        <CreateSite />
-      ) : (
-        <Project
-          numberOfProjects={auth?.user?.projects?.length}
-          site={auth?.user?.site}
-        />
-      )}
-    </Container>
+    <Container>{!auth?.user?.site ? <CreateSite /> : <Project />}</Container>
   );
 }

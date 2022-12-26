@@ -13,7 +13,7 @@ import {
   useCreateProjectMutation,
 } from "../../utils/__generated__/graphql";
 
-export const CreateFirstProject = () => {
+export const CreateProject = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm<CreateProjectMutationVariables>({});
@@ -22,6 +22,8 @@ export const CreateFirstProject = () => {
   const handleOnSubmit = async (data: CreateProjectMutationVariables) => {
     try {
       await createProject({ variables: data });
+      auth?.updateUser();
+      navigate(`/${auth?.user?.site}/atlassion.net/jira/projects`);
     } catch (e) {
       console.log(e);
     }

@@ -3,16 +3,18 @@ import React, {
   PropsWithChildren,
   useEffect,
   useState,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+  FunctionComponent,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import {
   LoginMutationVariables,
   SignUpMutationVariables,
+  useGetUserLazyQuery,
   useGetUserQuery,
   useLoginMutation,
   User,
   useSignUpMutation,
-} from '../utils/__generated__/graphql';
+} from "../utils/__generated__/graphql";
 
 export interface AuthContextType {
   token?: string;
@@ -28,12 +30,15 @@ export interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({ children }: PropsWithChildren) => {
+export const AuthProvider = ({
+  children,
+}: PropsWithChildren): FunctionComponent => {
   const [token, setToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [initialized, setInitialized] = useState(false);
   const [signUpUser, signUpUserLoading] = useSignUpMutation();
   const [loginUser, loginState] = useLoginMutation();
+  const [refetchUser] = useGetUserLazyQuery();
 
   const { loading: signUpLoading } = signUpUserLoading;
   const { loading: loginLoading } = loginState;
@@ -41,16 +46,19 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setToken(localStorage.getItem('token'));
-      setUser(JSON.parse(localStorage.getItem('user') as string));
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      setUser(JSON.parse(localStorage.getItem("user") as string));
     }
     setInitialized(true);
   }, []);
 
   const updateUser = async () => {
-    const updatedUser = await useGetUserQuery({ variables: user.email });
-    localStorage.setItem('user', JSON.stringify(updatedUser.data?.getUser));
+    const updatedUser = await refetchUser({
+      variables: { email: user.email },
+    });
+    console.log(updatedUser);
+    localStorage.setItem("user", JSON.stringify(updatedUser.data?.getUser));
     setUser(updatedUser.data?.getUser);
   };
 
@@ -58,11 +66,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     try {
       const response = await loginUser({ variables: data });
       const obj = response?.data?.login;
-      localStorage.setItem('token', obj?.token as string);
-      localStorage.setItem('user', JSON.stringify(obj?.user));
+      localStorage.setItem("token", obj?.token as string);
+      localStorage.setItem("user", JSON.stringify(obj?.user));
       setToken(obj?.token);
       setUser(obj?.user);
-      navigate('/');
+      navigate("/");
     } catch (e) {
       console.log(e);
     }
@@ -71,20 +79,20 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const handleLogout = () => {
     setToken(null);
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   const handleSignup = async (data: SignUpMutationVariables) => {
     try {
       const response = await signUpUser({ variables: data });
       const obj = response?.data?.signup;
-      localStorage.setItem('token', obj?.token as string);
-      localStorage.setItem('user', JSON.stringify(obj?.user));
+      localStorage.setItem("token", obj?.token as string);
+      localStorage.setItem("user", JSON.stringify(obj?.user));
       setToken(obj?.token);
       setUser(obj?.user);
-      navigate('/');
+      navigate("/");
     } catch (e) {
       console.log(e);
     }

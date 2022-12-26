@@ -83,15 +83,16 @@ export const Site = () => {
     try {
       await setUserSite({ variables: data });
       auth?.updateUser();
-      navigate("/createFirstProject");
+      navigate("/createProject");
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
+    console.log(auth?.user?.site);
     if (!!auth?.user?.site) {
-      navigate("/createFirstProject");
+      navigate("/");
     }
   }, []);
 

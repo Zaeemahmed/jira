@@ -3,5 +3,14 @@ query GetUser($email: String!) {
     id
     fullName
     email
+    site
+    projects {
+      id
+      name
+      projectLead {
+        fullName
+      }
+      key
+    }
   }
 }

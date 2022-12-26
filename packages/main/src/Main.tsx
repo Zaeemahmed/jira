@@ -5,7 +5,7 @@ import { UserMainPage } from "./Pages/home/UserMainPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SignIn } from "./Pages/signin/Signin";
 import { Site } from "./Pages/site/Site";
-import { CreateFirstProject } from "./Pages/createproject/CreateFirstProject";
+import { CreateProject } from "./Pages/createproject/CreateProject";
 import { Projects } from "./Pages/projects/Projects";
 
 const Main = () => {
@@ -20,10 +20,10 @@ const Main = () => {
         }
       />
       <Route
-        path="/createFirstProject"
+        path="/createProject"
         element={
           <ProtectedRoute>
-            <CreateFirstProject />
+            <CreateProject />
           </ProtectedRoute>
         }
       />

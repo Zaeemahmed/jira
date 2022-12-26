@@ -139,15 +139,18 @@ const RenderDropDownMenu = ({ user }: renderDropDownMenuProps) => {
 
 const ProjectsDropDown = () => {
   const auth = React.useContext(AuthContext);
+  const site = auth?.user?.site;
   return (
     <StyledProjectDropDown>
       <Typography>
-        <Link to={`${auth?.user?.site}/atlassion.net/jira/projects`}>
+        <Link to={`/${site}/atlassion.net/jira/projects`}>
           View all projects
         </Link>
       </Typography>
       <Divider />
-      <Typography>Create Project</Typography>
+      <Typography>
+        <Link to="/createProject">Create Project</Link>
+      </Typography>
     </StyledProjectDropDown>
   );
 };

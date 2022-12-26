@@ -8,6 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../context/Auth";
+import { Project } from "../../utils/__generated__/graphql";
+
+interface ProjectTableProps {
+  projects?: Project[];
+}
 
 interface Column {
   id: "name" | "key" | "type" | "lead";
@@ -50,7 +55,7 @@ function createData(
 
 const rows = [createData("India", "IN", "1324171354", "3287263")];
 
-export const ProjectsTable = () => {
+export const ProjectsTable = ({ projects }: ProjectTableProps) => {
   const { id } = useParams();
   const auth = React.useContext(AuthContext);
   const navigate = useNavigate();
@@ -79,17 +84,15 @@ export const ProjectsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, id) => {
+            {projects?.map((project, id) => {
               return (
                 <TableRow hover tabIndex={-1} key={id}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align || "left"}>
-                        {value}
-                      </TableCell>
-                    );
-                  })}
+                  <TableCell align={"left"}>{project.name}</TableCell>
+                  <TableCell align={"left"}>{project.key}</TableCell>
+                  <TableCell align={"left"}>Software</TableCell>
+                  <TableCell align={"left"}>
+                    {project.projectLead?.fullName}
+                  </TableCell>
                 </TableRow>
               );
             })}
