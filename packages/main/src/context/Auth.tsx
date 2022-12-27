@@ -10,7 +10,6 @@ import {
   LoginMutationVariables,
   SignUpMutationVariables,
   useGetUserLazyQuery,
-  useGetUserQuery,
   useLoginMutation,
   User,
   useSignUpMutation,
@@ -30,15 +29,13 @@ export interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-export const AuthProvider = ({
-  children,
-}: PropsWithChildren): FunctionComponent => {
+export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = React.useState<User>(null);
   const [initialized, setInitialized] = useState(false);
   const [signUpUser, signUpUserLoading] = useSignUpMutation();
   const [loginUser, loginState] = useLoginMutation();
-  const [refetchUser] = useGetUserLazyQuery();
+  const [refetchUser] = useGetUserLazyQuery({ fetchPolicy: "no-cache" });
 
   const { loading: signUpLoading } = signUpUserLoading;
   const { loading: loginLoading } = loginState;

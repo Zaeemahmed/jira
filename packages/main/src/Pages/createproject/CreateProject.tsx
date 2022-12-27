@@ -22,7 +22,7 @@ export const CreateProject = () => {
   const handleOnSubmit = async (data: CreateProjectMutationVariables) => {
     try {
       await createProject({ variables: data });
-      auth?.updateUser();
+      await auth?.updateUser();
       navigate(`/${auth?.user?.site}/atlassion.net/jira/projects`);
     } catch (e) {
       console.log(e);

@@ -174,7 +174,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string, site?: string | null } | null } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token?: string | null, user?: { __typename?: 'User', id: string, fullName: string, email: string, site?: string | null, projects?: Array<{ __typename?: 'Project', id: string, name: string, key: string, projectLead?: { __typename?: 'User', fullName: string } | null } | null> | null } | null } };
 
 export type SetUserSiteMutationVariables = Exact<{
   email: Scalars['String'];
@@ -280,6 +280,14 @@ export const LoginDocument = gql`
       fullName
       email
       site
+      projects {
+        id
+        name
+        projectLead {
+          fullName
+        }
+        key
+      }
     }
   }
 }
