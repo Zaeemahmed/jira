@@ -86,10 +86,15 @@ export const ProjectsTable = ({ projects }: ProjectTableProps) => {
           <TableBody>
             {projects?.map((project, id) => {
               return (
-                <TableRow hover tabIndex={-1} key={id}>
+                <TableRow
+                  hover
+                  tabIndex={-1}
+                  key={id}
+                  style={{ cursor: "pointer" }}
+                >
                   <TableCell align={"left"}>{project.name}</TableCell>
                   <TableCell align={"left"}>{project.key}</TableCell>
-                  <TableCell align={"left"}>Software</TableCell>
+                  <TableCell align={"left"}>Team-managed software</TableCell>
                   <TableCell align={"left"}>
                     {project.projectLead?.fullName}
                   </TableCell>
